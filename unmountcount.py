@@ -1,10 +1,15 @@
 #!/usr/bin/python
 
+from sys import exit
 from swift.common.constraints import check_mount
 from swift.common.utils import whataremyips
 from swift.common.ring import Ring
 
-ring = Ring('/etc/swift/object.ring.gz')
+try:
+    ring = Ring('/etc/swift/object.ring.gz')
+except IOError:
+    exit()
+
 my_ips = whataremyips()
 mounted = 0
 drivecount = 0
@@ -21,3 +26,4 @@ for dev in ring.devs:
 unmounted = drivecount - mounted
 if unmounted > 0:
     print unmounted
+
