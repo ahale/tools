@@ -7,6 +7,10 @@ import simplejson as json
 import Geoclue
 import requests
 
+pid = os.system('pgrep -c xlock | grep -qc ^1')
+if not int(pid):
+    sys.exit()
+
 POS_PROVIDER = 'Ubuntu GeoIP'
 WEATHER_ID = os.getenv('WEATHER_ID')
 TMPFILE = '/tmp/weather.json'
