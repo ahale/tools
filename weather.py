@@ -30,16 +30,18 @@ if cache_age > MIN_AGE:
     l.init()
     l.set_position_provider(POS_PROVIDER)
     pos = l.get_location_info()
-    print pos
     latitude = pos['latitude']
     longitude = pos['longitude']
-    url = 'http://www.myweather2.com/developer/forecast.ashx?uac=%s&query=%s,%s&temp_unit=c&output=json' % (WEATHER_ID, latitude, longitude)
+    W_URL='http://www.myweather2.com/developer/forecast.ashx'
+    W_QS='?uac=%s&query=%s,%s&temp_unit=c&output=json' % \
+          (WEATHER_ID, latitude, longitude)
+    url = W_URL + W_QS
     req = requests.request('GET', url)
     f = open(TMPFILE, 'wb')
     f.write(req.content)
     f.close()
 # else:
-    # print "using weather cache, age: %s" % cache_age
+#    print "using weather cache, age: %s" % cache_age
 
 f = open(TMPFILE, 'rb')
 s = f.read()
