@@ -8,11 +8,11 @@ import Geoclue
 import requests
 
 POS_PROVIDER = 'Ubuntu GeoIP'
-WEATHER_ID = os.getenv('WEATHER_ID', 'CHANGEME')
+WEATHER_ID = os.getenv('WEATHER_ID')
 TMPFILE = '/tmp/weather.json'
 MIN_AGE = 600
 
-if WEATHER_ID == 'CHANGEME':
+if not WEATHER_ID:
     print "set WEATHER_ID in env"
     sys.exit()
 
